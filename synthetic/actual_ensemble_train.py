@@ -69,12 +69,13 @@ def train_ensemble(encoders, heads, ensemble, train_dataloader, valid_dataloader
             totals = 0
             for j in train_dataloader:
                 op.zero_grad()
-                out, outs = model(j)
+                outs = model(j)
                 objective_args_dict['outs'] = outs
-                if type(criterion) == torch.nn.modules.loss.BCEWithLogitsLoss:
-                    loss = deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict)
-                else:
-                    loss = deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict)
+                if type(criterion[0]) == torch.nn.modules.loss.CrossEntropyLoss:
+                    losses = [deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict) for out, criterion in zip(outs, criterion)]
+                    loss = sum(losses) / len(losses)
+                else: 
+                    raise NotImplementedError
                 totalloss += loss * len(j[-1])
                 totals += len(j[-1])
                 loss.backward()
@@ -87,21 +88,24 @@ def train_ensemble(encoders, heads, ensemble, train_dataloader, valid_dataloader
                 true = []
                 pts = []
                 for j in valid_dataloader:
-                    out, outs = model(j)
+                    outs = model(j)
                     objective_args_dict['outs'] = outs
-                    if type(criterion) == torch.nn.modules.loss.BCEWithLogitsLoss:
-                        loss = deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict)
-                    else:
-                        loss = deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict)
+                    if type(criterion[0]) == torch.nn.modules.loss.CrossEntropyLoss:
+                        losses = [deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict) for out, criterion in zip(outs, criterion)]
+                        loss = sum(losses) / len(losses)
+                    else: 
+                        raise NotImplementedError
                     totalloss += loss*len(j[-1])
                     if task == "classification":
-                        pred.append(torch.argmax(out, 1))
+                        # take each tensor in the list and average them
+                        avg = torch.mean(torch.stack(outs), dim=0)
+                        pred.append(torch.argmax(avg, 1))
                     elif task == "multilabel":
-                        pred.append(torch.sigmoid(out).round())
+                        raise NotImplementedError
                     true.append(j[-1])
                     if auprc:
                         # pdb.set_trace()
-                        sm = softmax(out)
+                        sm = softmax(avg)
                         pts += [(sm[i][1].item(), j[-1][i].item())
                                 for i in range(j[-1].size(0))]
             if pred:
@@ -151,31 +155,36 @@ def single_test_ensemble(model, test_dataloader, auprc=False, task='classificati
         totalloss = 0
         pts = []
         for j in test_dataloader:
-            out, outs = model(j)
+            outs = model(j)
             # print('out', outs[0].shape, outs[1].shape)
             objective_args_dict['outs'] = outs
             if criterion is not None:
-                loss = criterion(out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")))
+                losses = [deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict) for out, criterion in zip(outs, criterion)]
+                loss = sum(losses) / len(losses)
                 totalloss += loss*len(j[-1])
             if task == "classification":
-                pred.append(torch.argmax(out, 1))
+                # take each tensor in the list and average them
+                avg = torch.mean(torch.stack(outs), dim=0)
+                pred.append(torch.argmax(avg, 1))
             elif task == "multilabel":
-                pred.append(torch.sigmoid(out).round())
+                raise NotImplementedError
+                # pred.append(torch.sigmoid(out).round())
             elif task == "posneg-classification":
-                prede = []
-                oute = out.cpu().numpy().tolist()
-                for i in oute:
-                    if i[0] > 0:
-                        prede.append(1)
-                    elif i[0] < 0:
-                        prede.append(-1)
-                    else:
-                        prede.append(0)
-                pred.append(torch.LongTensor(prede))
+                raise NotImplementedError
+                # prede = []
+                # oute = out.cpu().numpy().tolist()
+                # for i in oute:
+                #     if i[0] > 0:
+                #         prede.append(1)
+                #     elif i[0] < 0:
+                #         prede.append(-1)
+                #     else:
+                #         prede.append(0)
+                # pred.append(torch.LongTensor(prede))
             true.append(j[-1])
             if auprc:
                 # pdb.set_trace()
-                sm = softmax(out)
+                sm = softmax(avg)
                 pts += [(sm[i][1].item(), j[-1][i].item())
                         for i in range(j[-1].size(0))]
         if pred:
@@ -216,10 +225,10 @@ def test_ensemble(model, test_dataloaders_all, dataset='default', method_name='M
         no_robust (bool, optional): Whether to not apply robustness methods or not. Defaults to False.
     """
     if no_robust:
-        return single_test(model, test_dataloaders_all, auprc, task, criterion, save_preds=save_preds, save_acc=save_acc)
+        return single_test_ensemble(model, test_dataloaders_all, auprc, task, criterion, save_preds=save_preds, save_acc=save_acc)
 
     def _testprocess():
-        single_test(model, test_dataloaders_all[list(
+        single_test_ensemble(model, test_dataloaders_all[list(
             test_dataloaders_all.keys())[0]][0], auprc, task, criterion)
     all_in_one_test(_testprocess, [model])
 
@@ -227,7 +236,7 @@ def test_ensemble(model, test_dataloaders_all, dataset='default', method_name='M
         print("Testing on noisy data ({})...".format(noisy_modality))
         robustness_curve = dict()
         for test_dataloader in tqdm(test_dataloaders):
-            single_test_result = single_test(
+            single_test_result = single_test_ensemble(
                 model, test_dataloader, auprc, task, criterion)
             for k, v in single_test_result.items():
                 curve = robustness_curve.get(k, [])

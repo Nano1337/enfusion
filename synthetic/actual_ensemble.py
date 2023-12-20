@@ -49,7 +49,8 @@ heads = [MLP(args.output_dim, args.hidden_dim, args.num_classes, dropout=False).
 ensemble = ActualEnsemble().to(device)
 
 # Training
-train(encoders, heads, ensemble, traindata, validdata, args.epochs, optimtype=torch.optim.AdamW, lr=args.lr, weight_decay=args.weight_decay, criterion=torch.nn.CrossEntropyLoss(), save_model=args.saved_model, modalities=args.modalities)
+# note: we use one optimizer since each unimodal model has the same architecture and optimal learning rate
+train(encoders, heads, ensemble, traindata, validdata, args.epochs, optimtype=torch.optim.AdamW, lr=args.lr, weight_decay=args.weight_decay, criterion=[torch.nn.CrossEntropyLoss()]*len(args.modalities), save_model=args.saved_model, modalities=args.modalities)
 
 # Testing
 print("Testing:", args.saved_model)

@@ -1,0 +1,13 @@
+Train data: 14000
+Valid data: 3000
+Test data: 3000
+initializing ensemble model
+Epoch 0 train loss: tensor(3.4461, device='cuda:0', grad_fn=<DivBackward0>)
+Epoch 0 valid loss: tensor(3.4267, device='cuda:0') acc: 0.048
+Saving Best
+Training Time: 1.7574918270111084
+Training Peak Mem: 3819.9375
+Training Params: 103384
+Testing: synthetic/experiments/mix5/mix5_additive_best.pt
+loss: tensor(3.4257, device='cuda:0')
+acc: 0.044

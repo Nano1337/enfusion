@@ -40,4 +40,5 @@ class AdditiveEnsemble(nn.Module):
           out = model(j[i].float().to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")))
           outs.append(out)
           sum += out
+        # this averages the logits pre-softmax
         return sum / self.modelnum , outs

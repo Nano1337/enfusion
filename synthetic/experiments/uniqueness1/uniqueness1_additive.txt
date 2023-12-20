@@ -1,0 +1,13 @@
+Train data: 14000
+Valid data: 3000
+Test data: 3000
+initializing ensemble model
+Epoch 0 train loss: tensor(3.4049, device='cuda:0', grad_fn=<DivBackward0>)
+Epoch 0 valid loss: tensor(3.3580, device='cuda:0') acc: 0.051
+Saving Best
+Training Time: 1.7933557033538818
+Training Peak Mem: 3819.29296875
+Training Params: 103384
+Testing: synthetic/experiments/uniqueness1/uniqueness1_additive_best.pt
+loss: tensor(3.3546, device='cuda:0')
+acc: 0.05733333333333333

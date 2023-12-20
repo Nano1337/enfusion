@@ -23,14 +23,14 @@ parser.add_argument("--hidden-dim", default=512, type=int)
 parser.add_argument("--output-dim", default=512, type=int)
 parser.add_argument("--num-workers", default=4, type=int)
 parser.add_argument("--num-classes", default=2, type=int)
-parser.add_argument("--epochs", default=100, type=int)
+parser.add_argument("--epochs", default=1, type=int)
 parser.add_argument("--lr", default=1e-4, type=float)
 parser.add_argument("--weight-decay", default=0, type=float)
 parser.add_argument("--eval", default=True, type=int)
 parser.add_argument("--setting", default='redundancy', type=str)
 parser.add_argument("--saved-model", default=None, type=str)
+parser.add_argument('--out_dir', default='synthetic/experiments/redundancy', type=str)
 args = parser.parse_args()
-
 
 # Load data
 traindata, validdata, _, testdata = get_dataloader(path=args.data_path, keys=args.keys, modalities=args.modalities, batch_size=args.bs, num_workers=args.num_workers)
@@ -52,7 +52,7 @@ train(encoders, heads, ensemble, traindata, validdata, args.epochs, optimtype=to
 # Testing
 print("Testing:", args.saved_model)
 model = torch.load(args.saved_model).to(device)
-save_acc = ['synthetic/experiments2/results.pickle', args.setting]
-saved_dir = 'synthetic/experiments2/'
-saved_cluster = saved_dir + '{}/{}_additive_cluster.pickle'.format(args.setting, args.setting)
-test(model, testdata, no_robust=True, criterion=torch.nn.CrossEntropyLoss(), save_acc=save_acc, save_preds=saved_cluster)
+# save_acc = ['synthetic/experiments2/results.pickle', args.setting]
+# saved_dir = 'synthetic/experiments2/'
+# saved_cluster = saved_dir + '{}/{}_additive_cluster.pickle'.format(args.setting, args.setting)
+test(model, testdata, no_robust=True, criterion=torch.nn.CrossEntropyLoss(), save_acc=False, save_preds=False)

@@ -29,7 +29,6 @@ def save_data(data, filename):
     with open(os.path.join(args.out_path, filename), 'wb') as f:
         pickle.dump(data, f)
 
-
 num_data = args.num_data
 n_modality = args.modality_number
 num_classes = args.num_classes
@@ -58,6 +57,7 @@ else:
 total_data = [[] for _ in range(n_modality)]
 total_labels = []
 
+# transform into higher dim
 transforms = dict()
 for x in intersections:
     transforms[x] = np.random.uniform(0.0,1.0,(feature_dim_info[x].dim, args.transform_dim))
@@ -67,6 +67,7 @@ dataset = []
 for _ in range(num_data):
     raw_features = dict()
     for k, d in feature_dim_info.items():
+        # attain initial z_i vectors from multivariate Gaussian
         raw_features[k] = np.random.multivariate_normal(np.zeros((d.dim,)), np.eye(d.dim)*d.sep, (1,))[0]
     modality_data = []
     for i in range(n_modality):
@@ -76,6 +77,7 @@ for _ in range(num_data):
                 modality_data[-1].append(v @ transforms[k])
     modality_data = [np.concatenate(data) for data in modality_data]
 
+    # creating label data
     label_components = []
     if args.setting in dim_info:
         for k, d in label_dim_info.items():
@@ -94,6 +96,7 @@ for _ in range(num_data):
         label_prob = 1 / (1 + math.exp(-np.mean(label_vector)))
         label = int(label_prob*32) - int(int(label_prob*32)==32)
         dataset.append((label_prob, modality_data))
+        
 dataset = sorted(dataset, key=lambda x: x[0])
 for label in range(num_classes):
     tmp = dataset[label*num_data//num_classes:(label+1)*num_data//num_classes]

@@ -130,7 +130,7 @@ def train(encoders, heads, ensemble, train_dataloader, valid_dataloader, total_e
         _trainprocess()
 
 
-def single_test(model, test_dataloader, auprc=False, task='classification', criterion=None, save_preds=None, save_acc=None):
+def single_test(model, test_dataloader, auprc=False, task='classification', criterion=None, save_preds=None, save_acc=False):
     """Test ensemble model on one dataloader.
 
     Args:

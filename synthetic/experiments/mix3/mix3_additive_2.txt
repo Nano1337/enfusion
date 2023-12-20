@@ -1,0 +1,7 @@
+Train data: 14000
+Valid data: 3000
+Test data: 3000
+initializing ensemble model
+Epoch 0 train loss: tensor(4.2133, device='cuda:0', grad_fn=<DivBackward0>)
+Epoch 0 valid loss: tensor(3.2391, device='cuda:0') acc: 0.5296666666666666
+Saving Best

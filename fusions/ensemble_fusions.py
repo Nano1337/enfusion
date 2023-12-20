@@ -42,3 +42,14 @@ class AdditiveEnsemble(nn.Module):
           sum += out
         # this averages the logits pre-softmax
         return sum / self.modelnum , outs
+
+class ActualEnsemble(nn.Module): 
+    def __init__(self, models): 
+        super(ActualEnsemble, self).__init__()
+        self.models = models
+
+    def forward(self, x):
+        outs = []
+        for model in self.models:
+            outs.append(model(x))
+        return outs

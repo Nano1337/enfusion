@@ -14,13 +14,13 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--num-data", default=10000, type=int)
 parser.add_argument("--modality-number", default=2, type=int)
-parser.add_argument("--feature-dim", default=5, type=int)
-parser.add_argument("--feature-sep", default=1.5, type=float)
+parser.add_argument("--feature-dim", default=50, type=int) # dim = 50 as reported in paper
+parser.add_argument("--feature-sep", default=0.25, type=float) # variance, sigma^2 = 0.25, so sigma = 0.5 as in paper
 parser.add_argument("--label-dim", nargs='+', default=[5], type=int)
-parser.add_argument("--transform-dim", default=32, type=int)
+parser.add_argument("--transform-dim", default=100, type=int) # transform dim = 100 as reported in paper
 parser.add_argument('--setting', default='redundancy', type=str)
 parser.add_argument('--mix-ratio', nargs='+', default=None, type=float)
-parser.add_argument('--num-classes', default=32, type=int)
+parser.add_argument('--num-classes', default=2, type=int)
 parser.add_argument('--out-path', default='MultiBench/synthetic', type=str)
 args = parser.parse_args()
 

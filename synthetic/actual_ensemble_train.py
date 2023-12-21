@@ -67,6 +67,8 @@ def train_ensemble(encoders, heads, ensemble, train_dataloader, valid_dataloader
         for epoch in range(total_epochs):
             totalloss = 0.0
             totals = 0
+            true = []
+            pred = []
             for j in train_dataloader:
                 op.zero_grad()
                 outs = model(j)
@@ -74,14 +76,22 @@ def train_ensemble(encoders, heads, ensemble, train_dataloader, valid_dataloader
                 if type(criterion[0]) == torch.nn.modules.loss.CrossEntropyLoss:
                     losses = [deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict) for out, criterion in zip(outs, criterion)]
                     loss = sum(losses) / len(losses)
+
+                    # take each tensor in the list and average them
+                    avg = torch.mean(torch.stack(outs), dim=0)
+                    pred.append(torch.argmax(avg, 1))
                 else: 
                     raise NotImplementedError
                 totalloss += loss * len(j[-1])
                 totals += len(j[-1])
+                true.append(j[-1])
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(model.parameters(), 8)
                 op.step()
-            print("Epoch "+str(epoch)+" train loss: "+str(totalloss/totals))
+            pred = torch.cat(pred, 0).cpu().numpy()
+            true = torch.cat(true, 0).cpu().numpy()
+            acc = accuracy_score(true, pred)
+            print(f'Epoch {epoch} train loss: {totalloss/totals:.4f} acc: {acc:.4f}')
             with torch.no_grad():
                 totalloss = 0.0
                 pred = []
@@ -115,8 +125,7 @@ def train_ensemble(encoders, heads, ensemble, train_dataloader, valid_dataloader
             totals = true.shape[0]
             valloss = totalloss/totals
             acc = accuracy_score(true, pred)
-            print("Epoch "+str(epoch)+" valid loss: "+str(valloss) +
-                    " acc: "+str(acc))
+            print(f'Epoch {epoch} valid loss: {valloss:.4f} acc: {acc:.4f}')
             if acc > bestacc:
                 patience = 0
                 bestacc = acc
@@ -159,7 +168,7 @@ def single_test_ensemble(model, test_dataloader, auprc=False, task='classificati
             # print('out', outs[0].shape, outs[1].shape)
             objective_args_dict['outs'] = outs
             if criterion is not None:
-                losses = [deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict) for out, criterion in zip(outs, criterion)]
+                losses = [deal_with_objective(crit, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict) for out, crit in zip(outs, criterion)]
                 loss = sum(losses) / len(losses)
                 totalloss += loss*len(j[-1])
             if task == "classification":
@@ -192,11 +201,11 @@ def single_test_ensemble(model, test_dataloader, auprc=False, task='classificati
         true = torch.cat(true, 0).cpu().numpy()
         totals = true.shape[0]
         if auprc:
-            print("AUPRC: "+str(AUPRC(pts)))
+            print("AUPRC: " +str(AUPRC(pts)))
         if criterion is not None:
             print("loss: " + str(totalloss / totals))
         acc = accuracy_score(true, pred)
-        print("acc: "+str(acc))
+        print("acc: " +str(acc))
         if save_acc:
             with open(save_acc[0], 'rb') as f:
                 results = pickle.load(f)

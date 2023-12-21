@@ -5,15 +5,21 @@ Note, additive ensemble is actually logit averaging late fusion, not actual ense
 import torch
 import sys
 import os
+import numpy as np
+import random
 sys.path.append(os.getcwd())
 sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 from unimodals.common_models import Linear, MLP  # noqa
-from ensemble import train, test  # noqa
+from actual_ensemble_train import train_ensemble, test_ensemble  # noqa
 from get_data import get_dataloader  # noqa
 from fusions.ensemble_fusions import ActualEnsemble  # noqa
 
 import argparse
 
+
+# deterministic algos
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -27,14 +33,20 @@ parser.add_argument("--hidden-dim", default=512, type=int)
 parser.add_argument("--output-dim", default=512, type=int)
 parser.add_argument("--num-workers", default=4, type=int)
 parser.add_argument("--num-classes", default=2, type=int)
-parser.add_argument("--epochs", default=1, type=int)
+parser.add_argument("--epochs", default=100, type=int)
 parser.add_argument("--lr", default=1e-4, type=float)
 parser.add_argument("--weight-decay", default=0, type=float)
 parser.add_argument("--eval", default=True, type=int)
 parser.add_argument("--setting", default='redundancy', type=str)
 parser.add_argument("--saved-model", default=None, type=str)
 parser.add_argument('--out_dir', default='synthetic/experiments/redundancy', type=str)
+parser.add_argument('--seed', default=0, type=int)
 args = parser.parse_args()
+
+torch.manual_seed(args.seed)
+np.random.seed(args.seed)
+random.seed(args.seed)
+
 
 # Load data
 traindata, validdata, _, testdata = get_dataloader(path=args.data_path, keys=args.keys, modalities=args.modalities, batch_size=args.bs, num_workers=args.num_workers)
@@ -50,7 +62,7 @@ ensemble = ActualEnsemble().to(device)
 
 # Training
 # note: we use one optimizer since each unimodal model has the same architecture and optimal learning rate
-train(encoders, heads, ensemble, traindata, validdata, args.epochs, optimtype=torch.optim.AdamW, lr=args.lr, weight_decay=args.weight_decay, criterion=[torch.nn.CrossEntropyLoss()]*len(args.modalities), save_model=args.saved_model, modalities=args.modalities)
+train_ensemble(encoders, heads, ensemble, traindata, validdata, args.epochs, optimtype=torch.optim.AdamW, lr=args.lr, weight_decay=args.weight_decay, criterion=[torch.nn.CrossEntropyLoss()]*len(args.modalities), save_model=args.saved_model, modalities=args.modalities)
 
 # Testing
 print("Testing:", args.saved_model)
@@ -58,4 +70,4 @@ model = torch.load(args.saved_model).to(device)
 # save_acc = ['synthetic/experiments2/results.pickle', args.setting]
 # saved_dir = 'synthetic/experiments2/'
 # saved_cluster = saved_dir + '{}/{}_additive_cluster.pickle'.format(args.setting, args.setting)
-test(model, testdata, no_robust=True, criterion=torch.nn.CrossEntropyLoss(), save_acc=False, save_preds=False)
+test_ensemble(model, testdata, no_robust=True, criterion=[torch.nn.CrossEntropyLoss()]*len(args.modalities), save_acc=False, save_preds=False)

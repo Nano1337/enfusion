@@ -44,12 +44,27 @@ class AdditiveEnsemble(nn.Module):
         return sum / self.modelnum , outs
 
 class ActualEnsemble(nn.Module): 
-    def __init__(self, models): 
+    def __init__(self): 
         super(ActualEnsemble, self).__init__()
+    
+    def _initialize(self, models):
+        """Initialize Ensemble of Unimodal Models.
+        :param models: List of unimodal models
+        """
+        print('initializing ensemble model')
+
         self.models = models
+        self.modelnum = len(self.models)
+        # self.vars = []
+        # for i in range(self.modelnum):
+        #     # self.vars.append(self.models[i])
+        #     self.vars.append(nn.Parameter(torch.tensor(1.0), requires_grad=True).cuda())
+        return self
 
     def forward(self, x):
         outs = []
-        for model in self.models:
-            outs.append(model(x))
+        for i in range(self.modelnum):
+          model = self.models[i]
+          out = model(x[i].float().to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")))
+          outs.append(out)
         return outs

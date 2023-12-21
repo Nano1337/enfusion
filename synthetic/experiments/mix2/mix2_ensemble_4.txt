@@ -199,3 +199,15 @@ Epoch 95 train loss: 0.4492 acc: 0.9566
 Epoch 95 valid loss: 0.8207 acc: 0.5680
 Epoch 96 train loss: 0.4471 acc: 0.9583
 Epoch 96 valid loss: 0.8166 acc: 0.5807
+Epoch 97 train loss: 0.4462 acc: 0.9581
+Epoch 97 valid loss: 0.8258 acc: 0.5877
+Epoch 98 train loss: 0.4444 acc: 0.9612
+Epoch 98 valid loss: 0.8223 acc: 0.5783
+Epoch 99 train loss: 0.4416 acc: 0.9655
+Epoch 99 valid loss: 0.8327 acc: 0.5803
+Training Time: 826.3411555290222
+Training Peak Mem: 3867.578125
+Training Params: 858676
+Testing: synthetic/experiments/mix2/mix2_ensemble_best.pt
+loss: tensor(0.6647, device='cuda:0')
+acc: 0.6416666666666667

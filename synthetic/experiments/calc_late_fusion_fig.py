@@ -113,7 +113,7 @@ for dir in dirs:
     cat_valid_accuracies = []
 
     # go through each seed in a particular dataset
-    for f in files: 
+    for f in files[:3]: 
 
         # Initialize lists to store the extracted data
         train_losses = []
@@ -149,5 +149,17 @@ for dir in dirs:
     dict_valid_accuracies.update({dir: np.array(cat_valid_accuracies)})
     dict_valid_losses.update({dir: np.array(cat_valid_losses)})
 
-# Plot the results
-plot_results(dict_train_losses, dict_train_accuracies, dict_valid_losses, dict_valid_accuracies, figdir, dirs)
+# pickle dictionaries
+import pickle
+
+# Save the dictionary
+with open('figs/fusion_data.pickle', 'wb') as handle:
+    pickle.dump({
+        'fusion_train_accuracies': dict_train_accuracies,
+        'fusion_train_losses': dict_train_losses,
+        'fusion_valid_accuracies': dict_valid_accuracies,
+        'fusion_valid_losses': dict_valid_losses
+    }, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+# # Plot the results
+# plot_results(dict_train_losses, dict_train_accuracies, dict_valid_losses, dict_valid_accuracies, figdir, dirs)

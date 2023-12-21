@@ -192,3 +192,21 @@ Epoch 92 train loss: 0.3686 acc: 0.9974
 Epoch 92 valid loss: 0.6396 acc: 0.8243
 Epoch 93 train loss: 0.3676 acc: 0.9973
 Epoch 93 valid loss: 0.6450 acc: 0.8280
+Epoch 94 train loss: 0.3670 acc: 0.9979
+Epoch 94 valid loss: 0.6450 acc: 0.8253
+Epoch 95 train loss: 0.3668 acc: 0.9982
+Epoch 95 valid loss: 0.6486 acc: 0.8283
+Epoch 96 train loss: 0.3657 acc: 0.9986
+Epoch 96 valid loss: 0.6505 acc: 0.8250
+Epoch 97 train loss: 0.3649 acc: 0.9986
+Epoch 97 valid loss: 0.6517 acc: 0.8230
+Epoch 98 train loss: 0.3645 acc: 0.9985
+Epoch 98 valid loss: 0.6543 acc: 0.8263
+Epoch 99 train loss: 0.3640 acc: 0.9987
+Epoch 99 valid loss: 0.6570 acc: 0.8287
+Training Time: 840.9451048374176
+Training Peak Mem: 3866.51171875
+Training Params: 858676
+Testing: synthetic/experiments/redundancy/redundancy_ensemble_best.pt
+loss: tensor(0.5072, device='cuda:0')
+acc: 0.8583333333333333

@@ -191,3 +191,21 @@ Epoch 92 train loss: 0.4315 acc: 0.9649
 Epoch 92 valid loss: 0.7519 acc: 0.6647
 Epoch 93 train loss: 0.4301 acc: 0.9643
 Epoch 93 valid loss: 0.7538 acc: 0.6693
+Epoch 94 train loss: 0.4278 acc: 0.9668
+Epoch 94 valid loss: 0.7548 acc: 0.6750
+Epoch 95 train loss: 0.4265 acc: 0.9687
+Epoch 95 valid loss: 0.7619 acc: 0.6750
+Epoch 96 train loss: 0.4249 acc: 0.9711
+Epoch 96 valid loss: 0.7602 acc: 0.6773
+Epoch 97 train loss: 0.4235 acc: 0.9721
+Epoch 97 valid loss: 0.7629 acc: 0.6633
+Epoch 98 train loss: 0.4219 acc: 0.9726
+Epoch 98 valid loss: 0.7669 acc: 0.6603
+Epoch 99 train loss: 0.4211 acc: 0.9731
+Epoch 99 valid loss: 0.7683 acc: 0.6637
+Training Time: 841.0349295139313
+Training Peak Mem: 3867.36328125
+Training Params: 858676
+Testing: synthetic/experiments/synergy/synergy_ensemble_best.pt
+loss: tensor(0.6217, device='cuda:0')
+acc: 0.709

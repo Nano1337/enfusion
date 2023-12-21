@@ -1,6 +1,6 @@
 #!/bin/bash
 
-seed=3
+seed=4
 
 # Echo the seed for confirmation
 echo "Running experiment with seed: $seed"

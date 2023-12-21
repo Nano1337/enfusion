@@ -1,0 +1,28 @@
+Train data: 14000
+Valid data: 3000
+Test data: 3000
+initializing ensemble model
+Epoch 0 train loss: 0.6280 acc: 0.7096
+Epoch 0 valid loss: 0.6207 acc: 0.7117
+Saving Best
+Epoch 1 train loss: 0.6200 acc: 0.7194
+Epoch 1 valid loss: 0.6236 acc: 0.7037
+Epoch 2 train loss: 0.6183 acc: 0.7241
+Epoch 2 valid loss: 0.6234 acc: 0.7047
+Epoch 3 train loss: 0.6174 acc: 0.7239
+Epoch 3 valid loss: 0.6223 acc: 0.7097
+Epoch 4 train loss: 0.6147 acc: 0.7291
+Epoch 4 valid loss: 0.6240 acc: 0.7063
+Epoch 5 train loss: 0.6136 acc: 0.7290
+Epoch 5 valid loss: 0.6243 acc: 0.7050
+Epoch 6 train loss: 0.6129 acc: 0.7321
+Epoch 6 valid loss: 0.6223 acc: 0.7137
+Saving Best
+Epoch 7 train loss: 0.6113 acc: 0.7356
+Epoch 7 valid loss: 0.6231 acc: 0.7117
+Epoch 8 train loss: 0.6090 acc: 0.7364
+Epoch 8 valid loss: 0.6227 acc: 0.7093
+Epoch 9 train loss: 0.6080 acc: 0.7405
+Epoch 9 valid loss: 0.6229 acc: 0.7057
+Epoch 10 train loss: 0.6075 acc: 0.7402
+Epoch 10 valid loss: 0.6263 acc: 0.7063

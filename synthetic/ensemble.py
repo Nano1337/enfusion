@@ -67,6 +67,8 @@ def train(encoders, heads, ensemble, train_dataloader, valid_dataloader, total_e
         for epoch in range(total_epochs):
             totalloss = 0.0
             totals = 0
+            true = []
+            pred = []
             for j in train_dataloader:
                 op.zero_grad()
                 out, outs = model(j)
@@ -77,10 +79,15 @@ def train(encoders, heads, ensemble, train_dataloader, valid_dataloader, total_e
                     loss = deal_with_objective(criterion, out, j[-1].to(torch.device("cuda:0" if torch.cuda.is_available() else "cpu")), objective_args_dict)
                 totalloss += loss * len(j[-1])
                 totals += len(j[-1])
+                pred.append(torch.argmax(out, 1))
+                true.append(j[-1])
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_(model.parameters(), 8)
                 op.step()
-            print("Epoch "+str(epoch)+" train loss: "+str(totalloss/totals))
+            pred = torch.cat(pred, 0).cpu().numpy()
+            true = torch.cat(true, 0).cpu().numpy()
+            acc = accuracy_score(true, pred)
+            print(f'Epoch {epoch} train loss: {totalloss/totals:.4f} acc: {acc:.4f}')
             with torch.no_grad():
                 totalloss = 0.0
                 pred = []
@@ -111,8 +118,7 @@ def train(encoders, heads, ensemble, train_dataloader, valid_dataloader, total_e
             totals = true.shape[0]
             valloss = totalloss/totals
             acc = accuracy_score(true, pred)
-            print("Epoch "+str(epoch)+" valid loss: "+str(valloss) +
-                    " acc: "+str(acc))
+            print(f'Epoch {epoch} valid loss: {valloss:.4f} acc: {acc:.4f}')
             if acc > bestacc:
                 patience = 0
                 bestacc = acc

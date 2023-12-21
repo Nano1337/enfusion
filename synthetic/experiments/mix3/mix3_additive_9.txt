@@ -1,4 +1,0 @@
-Train data: 14000
-Valid data: 3000
-Test data: 3000
-initializing ensemble model

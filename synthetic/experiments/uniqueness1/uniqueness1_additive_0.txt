@@ -2,37 +2,226 @@ Train data: 14000
 Valid data: 3000
 Test data: 3000
 initializing ensemble model
-Epoch 0 train loss: tensor(4.6131, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 0 valid loss: tensor(3.4764, device='cuda:0') acc: 0.58
+Epoch 0 train loss: 4.6131 acc: 0.4399
+Epoch 0 valid loss: 3.4764 acc: 0.5800
 Saving Best
-Epoch 1 train loss: tensor(3.0889, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 1 valid loss: tensor(2.7698, device='cuda:0') acc: 0.667
+Epoch 1 train loss: 3.0889 acc: 0.6273
+Epoch 1 valid loss: 2.7698 acc: 0.6670
 Saving Best
-Epoch 2 train loss: tensor(2.6779, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 2 valid loss: tensor(2.6033, device='cuda:0') acc: 0.683
+Epoch 2 train loss: 2.6779 acc: 0.6744
+Epoch 2 valid loss: 2.6033 acc: 0.6830
 Saving Best
-Epoch 3 train loss: tensor(2.5595, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 3 valid loss: tensor(2.6049, device='cuda:0') acc: 0.6803333333333333
-Epoch 4 train loss: tensor(2.5986, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 4 valid loss: tensor(2.5286, device='cuda:0') acc: 0.6933333333333334
+Epoch 3 train loss: 2.5595 acc: 0.6876
+Epoch 3 valid loss: 2.6049 acc: 0.6803
+Epoch 4 train loss: 2.5986 acc: 0.6779
+Epoch 4 valid loss: 2.5286 acc: 0.6933
 Saving Best
-Epoch 5 train loss: tensor(2.5657, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 5 valid loss: tensor(2.6109, device='cuda:0') acc: 0.681
-Epoch 6 train loss: tensor(2.5300, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 6 valid loss: tensor(2.5641, device='cuda:0') acc: 0.6926666666666667
-Epoch 7 train loss: tensor(2.5313, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 7 valid loss: tensor(2.5592, device='cuda:0') acc: 0.6903333333333334
-Epoch 8 train loss: tensor(2.5122, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 8 valid loss: tensor(2.6043, device='cuda:0') acc: 0.6813333333333333
-Epoch 9 train loss: tensor(2.5236, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 9 valid loss: tensor(2.5670, device='cuda:0') acc: 0.6876666666666666
-Epoch 10 train loss: tensor(2.4914, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 10 valid loss: tensor(2.5590, device='cuda:0') acc: 0.689
-Epoch 11 train loss: tensor(2.5362, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 11 valid loss: tensor(2.5902, device='cuda:0') acc: 0.6806666666666666
-Epoch 12 train loss: tensor(2.5153, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 12 valid loss: tensor(2.5399, device='cuda:0') acc: 0.6866666666666666
-Epoch 13 train loss: tensor(2.4816, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 13 valid loss: tensor(2.5936, device='cuda:0') acc: 0.6793333333333333
-Epoch 14 train loss: tensor(2.4806, device='cuda:0', grad_fn=<DivBackward0>)
-Epoch 14 valid loss: tensor(2.5632, device='cuda:0') acc: 0.688
+Epoch 5 train loss: 2.5657 acc: 0.6810
+Epoch 5 valid loss: 2.6109 acc: 0.6810
+Epoch 6 train loss: 2.5300 acc: 0.6894
+Epoch 6 valid loss: 2.5641 acc: 0.6927
+Epoch 7 train loss: 2.5313 acc: 0.6902
+Epoch 7 valid loss: 2.5592 acc: 0.6903
+Epoch 8 train loss: 2.5122 acc: 0.6909
+Epoch 8 valid loss: 2.6043 acc: 0.6813
+Epoch 9 train loss: 2.5236 acc: 0.6897
+Epoch 9 valid loss: 2.5670 acc: 0.6877
+Epoch 10 train loss: 2.4914 acc: 0.6938
+Epoch 10 valid loss: 2.5590 acc: 0.6890
+Epoch 11 train loss: 2.5362 acc: 0.6861
+Epoch 11 valid loss: 2.5902 acc: 0.6807
+Epoch 12 train loss: 2.5153 acc: 0.6906
+Epoch 12 valid loss: 2.5399 acc: 0.6867
+Epoch 13 train loss: 2.4816 acc: 0.6967
+Epoch 13 valid loss: 2.5936 acc: 0.6793
+Epoch 14 train loss: 2.4806 acc: 0.6977
+Epoch 14 valid loss: 2.5632 acc: 0.6880
+Epoch 15 train loss: 2.4694 acc: 0.7006
+Epoch 15 valid loss: 2.5037 acc: 0.7050
+Saving Best
+Epoch 16 train loss: 2.4959 acc: 0.7044
+Epoch 16 valid loss: 2.5259 acc: 0.7077
+Saving Best
+Epoch 17 train loss: 2.4711 acc: 0.7097
+Epoch 17 valid loss: 2.4968 acc: 0.7077
+Epoch 18 train loss: 2.4685 acc: 0.7170
+Epoch 18 valid loss: 2.5404 acc: 0.7163
+Saving Best
+Epoch 19 train loss: 2.4571 acc: 0.7248
+Epoch 19 valid loss: 2.4543 acc: 0.7260
+Saving Best
+Epoch 20 train loss: 2.4582 acc: 0.7266
+Epoch 20 valid loss: 2.5665 acc: 0.7177
+Epoch 21 train loss: 2.4403 acc: 0.7349
+Epoch 21 valid loss: 2.5332 acc: 0.7270
+Saving Best
+Epoch 22 train loss: 2.4497 acc: 0.7418
+Epoch 22 valid loss: 2.5247 acc: 0.7313
+Saving Best
+Epoch 23 train loss: 2.4429 acc: 0.7490
+Epoch 23 valid loss: 2.4561 acc: 0.7443
+Saving Best
+Epoch 24 train loss: 2.4306 acc: 0.7512
+Epoch 24 valid loss: 2.4814 acc: 0.7433
+Epoch 25 train loss: 2.4446 acc: 0.7482
+Epoch 25 valid loss: 2.4853 acc: 0.7563
+Saving Best
+Epoch 26 train loss: 2.4111 acc: 0.7582
+Epoch 26 valid loss: 2.4730 acc: 0.7457
+Epoch 27 train loss: 2.4026 acc: 0.7644
+Epoch 27 valid loss: 2.4393 acc: 0.7547
+Epoch 28 train loss: 2.4289 acc: 0.7573
+Epoch 28 valid loss: 2.4374 acc: 0.7690
+Saving Best
+Epoch 29 train loss: 2.3938 acc: 0.7680
+Epoch 29 valid loss: 2.4230 acc: 0.7627
+Epoch 30 train loss: 2.3546 acc: 0.7710
+Epoch 30 valid loss: 2.4183 acc: 0.7633
+Epoch 31 train loss: 2.3597 acc: 0.7731
+Epoch 31 valid loss: 2.4349 acc: 0.7680
+Epoch 32 train loss: 2.3287 acc: 0.7781
+Epoch 32 valid loss: 2.3370 acc: 0.7670
+Epoch 33 train loss: 2.2824 acc: 0.7753
+Epoch 33 valid loss: 2.4144 acc: 0.7637
+Epoch 34 train loss: 2.2793 acc: 0.7808
+Epoch 34 valid loss: 2.2701 acc: 0.7723
+Saving Best
+Epoch 35 train loss: 2.2406 acc: 0.7839
+Epoch 35 valid loss: 2.3249 acc: 0.7747
+Saving Best
+Epoch 36 train loss: 2.2232 acc: 0.7814
+Epoch 36 valid loss: 2.2247 acc: 0.7797
+Saving Best
+Epoch 37 train loss: 2.2013 acc: 0.7784
+Epoch 37 valid loss: 2.1274 acc: 0.7930
+Saving Best
+Epoch 38 train loss: 2.1254 acc: 0.7818
+Epoch 38 valid loss: 2.0601 acc: 0.7883
+Epoch 39 train loss: 2.1146 acc: 0.7751
+Epoch 39 valid loss: 2.1107 acc: 0.7637
+Epoch 40 train loss: 2.0034 acc: 0.7709
+Epoch 40 valid loss: 2.0211 acc: 0.7583
+Epoch 41 train loss: 1.9036 acc: 0.7626
+Epoch 41 valid loss: 1.7835 acc: 0.7733
+Epoch 42 train loss: 1.8297 acc: 0.7511
+Epoch 42 valid loss: 1.7542 acc: 0.7513
+Epoch 43 train loss: 1.7067 acc: 0.7466
+Epoch 43 valid loss: 1.7097 acc: 0.7397
+Epoch 44 train loss: 1.6164 acc: 0.7426
+Epoch 44 valid loss: 1.6669 acc: 0.7347
+Epoch 45 train loss: 1.6304 acc: 0.7370
+Epoch 45 valid loss: 1.6265 acc: 0.7293
+Epoch 46 train loss: 1.5486 acc: 0.7419
+Epoch 46 valid loss: 1.5823 acc: 0.7343
+Epoch 47 train loss: 1.5717 acc: 0.7376
+Epoch 47 valid loss: 1.6735 acc: 0.7247
+Epoch 48 train loss: 1.5675 acc: 0.7356
+Epoch 48 valid loss: 1.5847 acc: 0.7363
+Epoch 49 train loss: 1.5617 acc: 0.7384
+Epoch 49 valid loss: 1.4937 acc: 0.7460
+Epoch 50 train loss: 1.5677 acc: 0.7384
+Epoch 50 valid loss: 1.4949 acc: 0.7490
+Epoch 51 train loss: 1.5715 acc: 0.7353
+Epoch 51 valid loss: 1.6484 acc: 0.7180
+Epoch 52 train loss: 1.5889 acc: 0.7309
+Epoch 52 valid loss: 1.5627 acc: 0.7287
+Epoch 53 train loss: 1.5766 acc: 0.7336
+Epoch 53 valid loss: 1.5897 acc: 0.7277
+Epoch 54 train loss: 1.5550 acc: 0.7364
+Epoch 54 valid loss: 1.5654 acc: 0.7290
+Epoch 55 train loss: 1.5264 acc: 0.7391
+Epoch 55 valid loss: 1.5883 acc: 0.7333
+Epoch 56 train loss: 1.5692 acc: 0.7377
+Epoch 56 valid loss: 1.6232 acc: 0.7220
+Epoch 57 train loss: 1.5489 acc: 0.7369
+Epoch 57 valid loss: 1.5526 acc: 0.7357
+Epoch 58 train loss: 1.6034 acc: 0.7305
+Epoch 58 valid loss: 1.5445 acc: 0.7333
+Epoch 59 train loss: 1.5958 acc: 0.7319
+Epoch 59 valid loss: 1.5730 acc: 0.7323
+Epoch 60 train loss: 1.5490 acc: 0.7379
+Epoch 60 valid loss: 1.6386 acc: 0.7230
+Epoch 61 train loss: 1.5489 acc: 0.7394
+Epoch 61 valid loss: 1.6124 acc: 0.7270
+Epoch 62 train loss: 1.5644 acc: 0.7356
+Epoch 62 valid loss: 1.6386 acc: 0.7207
+Epoch 63 train loss: 1.5383 acc: 0.7395
+Epoch 63 valid loss: 1.5604 acc: 0.7307
+Epoch 64 train loss: 1.5666 acc: 0.7361
+Epoch 64 valid loss: 1.5421 acc: 0.7420
+Epoch 65 train loss: 1.6201 acc: 0.7247
+Epoch 65 valid loss: 1.6045 acc: 0.7290
+Epoch 66 train loss: 1.6148 acc: 0.7281
+Epoch 66 valid loss: 1.5807 acc: 0.7267
+Epoch 67 train loss: 1.5414 acc: 0.7394
+Epoch 67 valid loss: 1.5529 acc: 0.7320
+Epoch 68 train loss: 1.5446 acc: 0.7384
+Epoch 68 valid loss: 1.5851 acc: 0.7343
+Epoch 69 train loss: 1.5567 acc: 0.7393
+Epoch 69 valid loss: 1.5699 acc: 0.7407
+Epoch 70 train loss: 1.6052 acc: 0.7289
+Epoch 70 valid loss: 1.5470 acc: 0.7383
+Epoch 71 train loss: 1.5800 acc: 0.7319
+Epoch 71 valid loss: 1.6073 acc: 0.7227
+Epoch 72 train loss: 1.5659 acc: 0.7389
+Epoch 72 valid loss: 1.6163 acc: 0.7223
+Epoch 73 train loss: 1.5825 acc: 0.7334
+Epoch 73 valid loss: 1.6601 acc: 0.7233
+Epoch 74 train loss: 1.5550 acc: 0.7391
+Epoch 74 valid loss: 1.5728 acc: 0.7310
+Epoch 75 train loss: 1.5758 acc: 0.7308
+Epoch 75 valid loss: 1.6023 acc: 0.7320
+Epoch 76 train loss: 1.5921 acc: 0.7309
+Epoch 76 valid loss: 1.6211 acc: 0.7290
+Epoch 77 train loss: 1.6131 acc: 0.7301
+Epoch 77 valid loss: 1.5449 acc: 0.7333
+Epoch 78 train loss: 1.5578 acc: 0.7356
+Epoch 78 valid loss: 1.5631 acc: 0.7280
+Epoch 79 train loss: 1.5566 acc: 0.7361
+Epoch 79 valid loss: 1.5770 acc: 0.7267
+Epoch 80 train loss: 1.5627 acc: 0.7357
+Epoch 80 valid loss: 1.4721 acc: 0.7373
+Epoch 81 train loss: 1.5696 acc: 0.7358
+Epoch 81 valid loss: 1.5065 acc: 0.7377
+Epoch 82 train loss: 1.5182 acc: 0.7417
+Epoch 82 valid loss: 1.5556 acc: 0.7367
+Epoch 83 train loss: 1.5666 acc: 0.7334
+Epoch 83 valid loss: 1.5608 acc: 0.7353
+Epoch 84 train loss: 1.5478 acc: 0.7355
+Epoch 84 valid loss: 1.6535 acc: 0.7233
+Epoch 85 train loss: 1.5493 acc: 0.7358
+Epoch 85 valid loss: 1.6632 acc: 0.7167
+Epoch 86 train loss: 1.5402 acc: 0.7402
+Epoch 86 valid loss: 1.6482 acc: 0.7187
+Epoch 87 train loss: 1.5858 acc: 0.7315
+Epoch 87 valid loss: 1.5937 acc: 0.7290
+Epoch 88 train loss: 1.5913 acc: 0.7313
+Epoch 88 valid loss: 1.6507 acc: 0.7227
+Epoch 89 train loss: 1.5710 acc: 0.7346
+Epoch 89 valid loss: 1.5365 acc: 0.7353
+Epoch 90 train loss: 1.5720 acc: 0.7338
+Epoch 90 valid loss: 1.5758 acc: 0.7223
+Epoch 91 train loss: 1.5590 acc: 0.7361
+Epoch 91 valid loss: 1.4471 acc: 0.7540
+Epoch 92 train loss: 1.6292 acc: 0.7294
+Epoch 92 valid loss: 1.5729 acc: 0.7413
+Epoch 93 train loss: 1.5860 acc: 0.7300
+Epoch 93 valid loss: 1.5825 acc: 0.7237
+Epoch 94 train loss: 1.5384 acc: 0.7387
+Epoch 94 valid loss: 1.6508 acc: 0.7230
+Epoch 95 train loss: 1.5266 acc: 0.7401
+Epoch 95 valid loss: 1.5857 acc: 0.7353
+Epoch 96 train loss: 1.5498 acc: 0.7371
+Epoch 96 valid loss: 1.6923 acc: 0.7200
+Epoch 97 train loss: 1.5925 acc: 0.7293
+Epoch 97 valid loss: 1.4954 acc: 0.7443
+Epoch 98 train loss: 1.5805 acc: 0.7323
+Epoch 98 valid loss: 1.6506 acc: 0.7247
+Epoch 99 train loss: 1.5690 acc: 0.7342
+Epoch 99 valid loss: 1.6512 acc: 0.7270
+Training Time: 843.3304512500763
+Training Peak Mem: 3867.3046875
+Training Params: 858676
+Testing: synthetic/experiments/uniqueness1/uniqueness1_additive_best.pt
+loss: tensor(2.2072, device='cuda:0')
+acc: 0.78

@@ -113,7 +113,7 @@ for dir in dirs:
     cat_valid_accuracies = []
 
     # go through each seed in a particular dataset
-    for f in files[:3]: # TODO: take this out once all 5 are completed
+    for f in files: 
 
         # Initialize lists to store the extracted data
         train_losses = []

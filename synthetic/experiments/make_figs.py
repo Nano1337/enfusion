@@ -32,6 +32,7 @@ def plot_combined_results(fusion_data, ensemble_data, save_dir, category_dirs):
     plt.close(fig_loss)
 
 def plot_category_data(ax, category, fusion_data, ensemble_data, data_type, ylabel):
+
     # Helper function to plot data for a single category
     epochs = range(len(fusion_data[f'train_{data_type}'][category][0]))  # Assuming all epochs are of the same length
 
@@ -65,6 +66,11 @@ import pickle
 with open('figs/ensemble_data.pickle', 'rb') as handle:
     ensemble_data = pickle.load(handle)
 
+first = 20
+
+for key in ensemble_data.keys():
+    for i in ensemble_data[key].keys():
+        ensemble_data[key][i] = ensemble_data[key][i][:, first:]
 
 ensemble_train_accuracies = ensemble_data['ensemble_train_accuracies']
 ensemble_train_losses = ensemble_data['ensemble_train_losses']
@@ -73,6 +79,10 @@ ensemble_valid_losses = ensemble_data['ensemble_valid_losses']
 
 with open('figs/fusion_data.pickle', 'rb') as handle:
     fusion_data = pickle.load(handle)
+
+for key in fusion_data.keys():
+    for i in fusion_data[key].keys():
+        fusion_data[key][i] = fusion_data[key][i][:, first:]
 
 fusion_train_accuracies = fusion_data['fusion_train_accuracies']
 fusion_train_losses = fusion_data['fusion_train_losses']
